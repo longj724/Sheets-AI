@@ -1,8 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import {
-  type NextFetchEvent,
-  type NextRequest,
-  NextResponse,
+import type {
+  NextFetchEvent,
+  NextRequest,
 } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 
@@ -47,19 +46,19 @@ export default function middleware(
         });
       }
 
-      if (
-        authObj.userId
-        && !authObj.orgId
-        && req.nextUrl.pathname.includes('/dashboard')
-        && !req.nextUrl.pathname.endsWith('/organization-selection')
-      ) {
-        const orgSelection = new URL(
-          '/onboarding/organization-selection',
-          req.url,
-        );
+      // if (
+      //   authObj.userId
+      //   && !authObj.orgId
+      //   && req.nextUrl.pathname.includes('/dashboard')
+      //   && !req.nextUrl.pathname.endsWith('/organization-selection')
+      // ) {
+      //   const orgSelection = new URL(
+      //     '/onboarding/organization-selection',
+      //     req.url,
+      //   );
 
-        return NextResponse.redirect(orgSelection);
-      }
+      //   return NextResponse.redirect(orgSelection);
+      // }
 
       return intlMiddleware(req);
     })(request, event);
